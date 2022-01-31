@@ -5,6 +5,8 @@ from .views import (
     ClientDetailView,
     ClientDeleteView,
     ClientCreateView,
+    CommentCreateView,
+
 )
 
 urlpatterns = [
@@ -15,7 +17,9 @@ urlpatterns = [
     path('<int:pk>/delete/',
          ClientDeleteView.as_view(), name='client_delete'),
     path('new/', ClientCreateView.as_view(), name='client_new'),
-#    path('', ClientListView.as_view(), name='client_list'),
+    #    path('', ClientListView.as_view(), name='client_list'),
     path('', views.ClientListView.as_view(), name='client_list'),
+    path('<int:pk>/add_comment/',
+         CommentCreateView.as_view(), name='client_addcomment'),
 
 ]

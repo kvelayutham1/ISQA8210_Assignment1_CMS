@@ -3,10 +3,11 @@
 {% block title %}Clients{% endblock title %}
 
 {% block content %}
+<H1> Clients</H1>
   {% for client in object_list %}
     <div class="card">
       <div class="card-header">
-        <span class="font-weight-bold">{{ client.name }}</span>
+        <span class="font-weight-bold"><a href="{% url 'client_detail' client.pk %}"> {{ client.name }} </a> </span>
         <span class="font-weight-bold">cell: {{ client.cell_phone }} | </span>
         <span class="font-weight-bold">acct: {{ client.acct_number }} | </span>
 
@@ -16,6 +17,7 @@
 <span class="font-muted">zip: {{ client.zipcode }} | </span>
         <span class="font-muted">email: {{ client.email }} | </span>
       </div>
+
       <div class="card-body">
         <p>{{client.notes}}</p>
         <a href="{% url 'client_edit' client.pk %}">Edit</a> |
@@ -25,11 +27,12 @@
       <div class="card-footer">
         {% for comment in client.comments.all %}
           <p>
-            <span class="font-weight-bold">{{ comment.author }} &middot;</span>
+            <span class="font-weight-bold">{{ comment.author }} </span><span class="font-weight-light">{{comment.date}}</span> &middot;
             {{ comment }}
           </p>
         {% endfor %}
       </div>
+        <a href="{% url 'client_addcomment' client.pk %}">Add New Comment</a>
     </div>
     <br />
   {% endfor %}
