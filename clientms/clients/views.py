@@ -7,12 +7,17 @@ from django.views.generic import ListView, DetailView
 from .models import models
 from .models import Client, Comment
 from django.urls import reverse_lazy
+from django.contrib.auth.models import User
 from django.db.models.query import QuerySet
+from django.views import generic
 
 
-class ClientListView(LoginRequiredMixin, ListView):
+class ClientListView(LoginRequiredMixin, generic.ListView):
     model = Client
     template_name = 'client_list.html'
+
+    def get_queryset(self):
+        return Client.objects.filter(author=self.request.user)
 
 
 class ClientDetailView(LoginRequiredMixin, DetailView):
