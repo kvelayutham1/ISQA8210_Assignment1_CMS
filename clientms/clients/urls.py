@@ -6,6 +6,10 @@ from .views import (
     ClientDeleteView,
     ClientCreateView,
     CommentCreateView,
+    VehicleCreateView,
+    VehicleDetailView,
+    VehicleUpdateView,
+    VehicleDeleteView,
 
 )
 
@@ -21,5 +25,12 @@ urlpatterns = [
     path('', views.ClientListView.as_view(), name='client_list'),
     path('<int:pk>/add_comment/',
          CommentCreateView.as_view(), name='client_addcomment'),
+    path('vehicle_list/', views.VehicleListView.as_view(), name='vehicle_list'),
+    path('<int:pk>/vehicle/', VehicleDetailView.as_view(), name='vehicle_detail'),
+    path('newvehicle/', VehicleCreateView.as_view(), name='vehicle_new'),
+    path('<int:pk>/vehicle_edit/',
+         VehicleUpdateView.as_view(), name='vehicle_edit'),
+    path('<int:pk>/vehicle_delete/',
+         VehicleDeleteView.as_view(), name='vehicle_delete'),
 
 ]

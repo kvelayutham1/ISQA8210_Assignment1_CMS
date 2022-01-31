@@ -6,7 +6,33 @@
     <p>by {{ object.author }} | {{ object.date }}</p>
     <p>{{ object.note }}</p>
   </div>
+<div class="client-entry">
+            <p><b> Vehicles owned:</b>
+
+        {% for vehicle in client.vehicle.all %}
+                <a href="{% url 'vehicle_detail' vehicle.id %}">
+               <span class="font-weight-light"> | {{ vehicle.make }} </span>
+                </a>
+        {% endfor %}
+               <span class="font-weight-light"> <a href="{% url 'vehicle_new' %}">+ New Vehilce</a> </span>
+</p>
+
+</div>
+    <div class="card-footer">
+        <p><b><i> Comments:</i></b></p>
+        {% for comment in client.comments.all %}
+          <p>
+            <span class="font-weight-bold">{{ comment.author }} </span><span class="font-weight-light">{{comment.date}}</span> &middot;
+            {{ comment }}
+          </p>
+
+        {% endfor %}
+      <a href="{% url 'client_addcomment' client.pk %}">Add New Comment</a>
+      </div>
+
 
   <p><a href="{% url 'client_edit' client.pk %}">Edit</a> | <a href="{% url 'client_delete' client.pk %}">Delete</a></p>
   <p>Back to <a href="{% url 'client_list' %}">All Clients</a>.</p>
+
+ <p>To manage vehicle details  <a href="{% url 'vehicle_list' %}">Vehicle Management </a>.</p>
 {% endblock content %}

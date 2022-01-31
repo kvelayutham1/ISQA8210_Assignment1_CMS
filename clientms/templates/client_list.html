@@ -10,7 +10,6 @@
         <span class="font-weight-bold"><a href="{% url 'client_detail' client.pk %}"> {{ client.name }} </a> </span>
         <span class="font-weight-bold">cell: {{ client.cell_phone }} | </span>
         <span class="font-weight-bold">acct: {{ client.acct_number }} | </span>
-
         <span class="font-muted">addr: {{ client.address }} | </span>
         <span class="font-muted-">city: {{ client.city }} | </span>
         <span class="font-muted">st: {{ client.state }} | </span>
@@ -19,20 +18,36 @@
       </div>
 
       <div class="card-body">
+          <p><b> Notes:</b></p>
         <p>{{client.notes}}</p>
         <a href="{% url 'client_edit' client.pk %}">Edit</a> |
         <a href="{% url 'client_delete' client.pk %}">Delete</a>
 
       </div>
+              <div class="card-footer">
+          <p><b> Vehicles owned:</b>
+
+        {% for vehicle in client.vehicle.all %}
+<a href="{% url 'vehicle_detail' vehicle.id %}">
+                   <span class="font-weight-light"> | {{ vehicle.make }} </span>
+
+</a>
+        {% endfor %}
+</p>
+                  <span class="font-weight-light"> <a href="{% url 'vehicle_new' %}">+ New Vehilce</a> </span>
+
+<!--          <p><a href="{% url 'vehicle_list' %}">View Vehicle List</a></p> -->
+        </div>
       <div class="card-footer">
+          <p><b> Comments:</b></p>
         {% for comment in client.comments.all %}
           <p>
             <span class="font-weight-bold">{{ comment.author }} </span><span class="font-weight-light">{{comment.date}}</span> &middot;
             {{ comment }}
           </p>
         {% endfor %}
+          <a href="{% url 'client_addcomment' client.pk %}">Add New Comment</a>
       </div>
-        <a href="{% url 'client_addcomment' client.pk %}">Add New Comment</a>
     </div>
     <br />
   {% endfor %}
