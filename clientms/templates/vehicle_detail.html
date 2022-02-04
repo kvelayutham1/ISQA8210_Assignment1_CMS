@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="client-entry">
+  <h2>{{ object.make }}</h2>
+   <p><b>Client : </b>{{ object.client }} </p>
+    <p><b>Model : </b>{{ object.model }} </p>
+    <p><b>VIN Number : </b>{{ object.VIN_number }}</p>
+  <p><b>Date of Purchase : </b>{{ object.Date_of_Purchase }}</p>
+  <p><b>Date of Last Service : </b>{{ object.Date_of_LastService }}</p>
+  <p><b>Details recorded by : </b>{{ object.author }}</p>
+
+  </div>
+ <p><a href="{% url 'vehicle_edit' vehicle.id %}">Edit</a> |
+        <a href="{% url 'vehicle_delete' vehicle.id %}">Delete</a>
+     </p>
+
+<!-- <p>Back to <a href="{% url 'vehicle_list' %}">Vehicle Management </a>.</p> -->
+
+  <p>Back to <a href="{% url 'client_list' %}">All Clients</a>.</p>
+{% endblock content %}
