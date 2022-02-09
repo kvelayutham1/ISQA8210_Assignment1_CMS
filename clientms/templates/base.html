@@ -17,6 +17,8 @@
       {% if user.is_authenticated %}
         <ul class="navbar-nav mr-auto">
           <li class="nav-item"><a href="{% url 'client_new' %}">+ New Client</a></li>
+          &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;
+          <li class="nav-item"><a href="{% url 'vehicle_new' %}">+ New Vehilce</a></li>
         </ul>
       {% endif %}
       <button class="navbar-toggler" type="button" data-toggle="collapse"

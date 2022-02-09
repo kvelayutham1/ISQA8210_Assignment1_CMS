@@ -10,6 +10,7 @@ from django.urls import reverse_lazy
 from django.contrib.auth.models import User
 from django.db.models.query import QuerySet
 from django.views import generic
+from .forms import forms, CommentForm
 
 
 class ClientListView(LoginRequiredMixin, generic.ListView):
@@ -51,13 +52,21 @@ class ClientCreateView(LoginRequiredMixin, CreateView):
 
 class CommentCreateView(LoginRequiredMixin, CreateView):
     model = Comment
+    #    form_class = CommentForm
     template_name = 'add_comment.html'
+    #    fields = ('comment', 'author', )
     fields = ('client', 'comment',)
     login_url = 'login'
 
     def form_valid(self, form):
+        # In an effort to pass client.pk as initial value for client field
+        #        client_id = self.request.POST.get('client_id')
+        #        client_id = Client.objects.get(pk=self.kwargs['client.pk'])
         form.instance.author = self.request.user
-        #        form.instance.client = self.client.pk
+        #        self.object = form.save(commit=False)
+        #        self.object.client_ids = client_id
+        #        form.instance.client_id = client_id
+        #        self.object.save()
         return super().form_valid(form)
 
 
